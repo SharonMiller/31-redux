@@ -1,20 +1,12 @@
-![cf](http://i.imgur.com/7v5ASc8.png) 31: Budget Tracker
+31: Budget Tracker
 ===
+##By Sharon Miller
 
-## Submission Instructions
-  * Work in a fork of this repository
-  * Work in a branch on your fork
-  * Write all of your code in a directory named `lab-` + `<your name>` **e.g.** `lab-duncan`
-  * Submit a pull request to this repository
-  * Submit a link to your pull request on canvas
-  * Submit a question, observation, and how long you spent on canvas
+## Features
+* A budget tracking application
+* Creates frontend routes using react-router-dom
+* Applications are structured into modules
 
-## Learning Objectives
-* Students will learn to create frontend routes using react-router-dom
-* Students will learn to restructure their applications into modules
-* Students will learn the difference between view state and application state
-* Students will learn to lift application state to better control one way data flow
-* Students will learn to create and import sass partials
 
 ## Requirements
 #### Configuration
@@ -44,14 +36,13 @@ Your lab directory must include
 * **src/style/_base.scss** -- base styles
 * **src/style/_layout.scss** -- layout styles
 
-#### Feature Tasks
+#### Features
 ##### category
-* in this app a category should contain at least the following properties
+* category  contains at least the following properties
   * `id` a uuid
   * `timestamp` a date from when the category was created
   * `name` a string that is the name of the category
   * `budget` a number that is the total amount of $ in the category
-  * feel free to add more to your categories
 
 ##### redux
 ###### reducer
@@ -67,7 +58,7 @@ Your lab directory must include
 ###### store
 * in `lib/store.js` export a function that will return a new redux store from your category reducer
 
-##### Components
+##### Structure Components
 Create the following components and structure them according to the following diagram.
 ```
 App
@@ -101,8 +92,3 @@ The App component should set up the Provider for the redux store and the Router.
 * should display a CategoryForm
   * `onComplete` the form should update the component in the application state
 
-#### Test
-* Test each interaction of your category reducer
-
-#### Documentation
-Write a description of the project in your README.md
