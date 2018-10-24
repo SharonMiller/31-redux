@@ -19,6 +19,8 @@ class CategoryItem extends React.Component {
         <p><em>${this.props.category.budget}</em></p>
         <button id="delete-button" onClick={this.handleClick}>DELETE</button>
         {this.props.children}
+
+        {/* <button id="update">UPDATE</button> */}
       </div>
     );
   }

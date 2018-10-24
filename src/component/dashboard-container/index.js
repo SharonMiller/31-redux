@@ -11,6 +11,7 @@ import {
   categoryDelete
 } from '../../actions/category-actions';
 import CategoryItem from '../category-item/index';
+import UpdateItem from '../category-update/index';
 
 // get form component
 import CategoryForm from '../category-form/index';
@@ -41,8 +42,13 @@ class DashboardContainer extends React.Component {
                 category={category}
                 destroy={this.props.categoryDelete}
                 title={category.title}
-                budget={category.budget}
-              />
+                budget={category.budget}>
+                <UpdateItem buttonText="Update"
+                  category={category}
+                  onComplete={this.props.categoryUpdate} />
+
+              </CategoryItem>
+
             </li>
 
           })}
