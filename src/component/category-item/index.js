@@ -1,6 +1,7 @@
 // containing indexForm component this is the array 
 
 import React from 'react';
+import CategoryForm from '../category-form'
 
 class CategoryItem extends React.Component {
   constructor(props) {
@@ -14,10 +15,9 @@ class CategoryItem extends React.Component {
   render() {
     return (
       <div className="category-item">
-        <button id="delete-button" onClick={this.handleClick}>x</button>
         <h4>{this.props.category.title}</h4>
-        <p>{this.props.category.timestamp.toString()}</p>
         <p><em>${this.props.category.budget}</em></p>
+        <button id="delete-button" onClick={this.handleClick}>DELETE</button>
         {this.props.children}
       </div>
     );

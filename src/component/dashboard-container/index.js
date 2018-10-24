@@ -10,7 +10,7 @@ import {
   categoryReset,
   categoryDelete
 } from '../../actions/category-actions';
-import CategoryItem from '../category-item';
+import CategoryItem from '../category-item/index';
 
 // get form component
 import CategoryForm from '../category-form/index';
@@ -21,7 +21,7 @@ class DashboardContainer extends React.Component {
   componentDidMount() {
     console.log('__DASHBOARD__', this)
 
-    this.props.categoryCreate({ title: 'groceries' });
+    // this.props.categoryCreate({ title: 'groceries' });
   }
 
   render() {
@@ -31,13 +31,22 @@ class DashboardContainer extends React.Component {
         <CategoryForm
           buttonText='add to budget'
           onComplete={this.props.categoryCreate} />
+        <h2> Budget Categories </h2>
+        {console.log(this.props.categories)}
+        <ul>
+          {this.props.categories.map(category => {
+            return <li key={category.id}>
 
-        {this.props.categories.map(item => {
-          return <div key={item.id}>
-            <h3>{item.title}</h3>
-          </div>
-        })}
+              <CategoryItem
+                category={category}
+                destroy={this.props.categoryDelete}
+                title={category.title}
+                budget={category.budget}
+              />
+            </li>
 
+          })}
+        </ul>
       </main>
     )
   }
