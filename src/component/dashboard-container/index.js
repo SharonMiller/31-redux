@@ -11,7 +11,7 @@ import {
   categoryDelete
 } from '../../actions/category-actions';
 import CategoryItem from '../category-item/index';
-import UpdateItem from '../category-update/index';
+
 
 // get form component
 import CategoryForm from '../category-form/index';
@@ -27,45 +27,32 @@ class DashboardContainer extends React.Component {
 
   render() {
     return (
-      <main className="dashboard-container">
-        <h2> Budget Dashboard </h2>
-        <CategoryForm
-          buttonText='add to budget'
-          onComplete={this.props.categoryCreate} />
-        <h2> Budget Categories </h2>
-        {console.log(this.props.categories)}
+      <main id="dashboard-container">
+        <h2>Budget Dashboard</h2>
+        <CategoryForm buttonText='Create' onComplete={this.props.categoryCreate} />
+        <h3>Budget Categories</h3>
         <ul>
           {this.props.categories.map(category => {
             return <li key={category.id}>
-
-              <CategoryItem
-                category={category}
-                destroy={this.props.categoryDelete}
-                title={category.title}
-                budget={category.budget}>
-                <UpdateItem buttonText="Update"
-                  category={category}
-                  onComplete={this.props.categoryUpdate} />
-
+              <CategoryItem category={category} destroy={this.props.categoryDelete} onComplete={this.props.categoryUpdate}>
               </CategoryItem>
-
             </li>
-
           })}
         </ul>
       </main>
     )
   }
-
 }
 
-const mapStateToProps = state => {
+
+
+export const mapStateToProps = state => {
   return {
     categories: state
   }
 };
 
-const mapDispatchToProps = (dispatch, getState) => {
+export const mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryCreate: category => dispatch(categoryCreate(category)),
     categoryUpdate: category => dispatch(categoryUpdate(category)),

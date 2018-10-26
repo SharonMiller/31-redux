@@ -3,28 +3,47 @@
 import React from 'react';
 import CategoryForm from '../category-form'
 
+
 class CategoryItem extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      categoryEdit: false,
+    }
+
+
+    this.handleDelete = this.handleDelete.bind(this)
+    this.toggleCategoryEdit = this.toggleCategoryEdit.bind(this)
   }
-  handleClick(e) {
+  handleDelete(e) {
     this.props.destroy(this.props.category);
+  }
+
+  toggleCategoryEdit() {
+    this.setState({ categoryEdit: !this.state.categoryEdit })
   }
   render() {
     return (
-      <div className="category-item">
-        <h4>{this.props.category.title}</h4>
-        <p><em>${this.props.category.budget}</em></p>
-        <button id="delete-button" onClick={this.handleClick}>DELETE</button>
-        {this.props.children}
+      <section onDoubleClick={this.toggleCategoryEdit}>
+        {this.state.categoryEdit ?
+          <CategoryForm
+            buttonText="update category"
+            onComplete={this.props.onComplete}
+            category={this.props.category}
+            toggle={this.toggleCategoryEdit} /> :
+          <div>
+            <p>{this.props.category.title}</p>
+            <p>${this.props.category.budget}</p>
+            <button onClick={this.handleDelete}> X </button>
 
-        {/* <button id="update">UPDATE</button> */}
-      </div>
-    );
+
+
+          </div>
+        }
+      </section>
+    )
   }
+};
 
-}
-
-export default CategoryItem
+export default CategoryItem;

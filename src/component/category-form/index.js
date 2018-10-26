@@ -8,8 +8,8 @@ class CategoryForm extends React.Component {
     // this is where category model goes:
     this.state = {
       title: props.category ? props.category.title : '',
-      id: props.category ? props.category.id : '',
-      timestamp: props.category ? props.category.timestamp : '',
+      id: props.category ? props.category.id : null,
+      timestamp: props.category ? props.category.timestamp : null,
       budget: props.category ? props.category.budget : '',
 
     }
@@ -24,8 +24,9 @@ class CategoryForm extends React.Component {
 
 
   handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     this.props.onComplete(Object.assign({}, this.state))
+    if (this.props.toggle) this.props.toggle();
   }
 
   render() {
@@ -52,4 +53,4 @@ class CategoryForm extends React.Component {
   }
 }
 
-export default CategoryForm
+export default CategoryForm;

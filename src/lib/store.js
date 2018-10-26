@@ -1,4 +1,9 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from '../reducer/category';
 
-export default () => createStore(reducer);
+import logger from './middleware/logger'
+
+// Write some code using require-dir that dynamically creates this middleware array
+let middleware = [logger];
+
+export default () => createStore(reducer, applyMiddleware(...middleware))
