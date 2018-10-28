@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import reducer from '../reducer/category';
+import reducer from '../reducer/';
 
 import logger from './middleware/logger'
 

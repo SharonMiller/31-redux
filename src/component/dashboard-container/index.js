@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import * as utils from '../../lib/util'
 
 import {
   categoryCreate,
@@ -11,6 +12,12 @@ import {
   categoryDelete
 } from '../../actions/category-actions';
 import CategoryItem from '../category-item/index';
+
+import {
+  expenseCreate,
+  expenseUpdate,
+  expenseDelete,
+} from '../../actions/expense-actions';
 
 
 // get form component
@@ -29,16 +36,15 @@ class DashboardContainer extends React.Component {
     return (
       <main id="dashboard-container">
         <h2>Budget Dashboard</h2>
-        <CategoryForm buttonText='Create' onComplete={this.props.categoryCreate} />
+        <CategoryForm buttonText='Create' onComplete={this.props.actions.categoryCreate} />
         <h3>Budget Categories</h3>
-        <ul>
-          {this.props.categories.map(category => {
-            return <li key={category.id}>
-              <CategoryItem category={category} destroy={this.props.categoryDelete} onComplete={this.props.categoryUpdate}>
-              </CategoryItem>
-            </li>
-          })}
-        </ul>
+        {utils.renderIf(this.props.categories,
+          <div>
+            {this.props.categories.map(item =>
+              <CategoryItem key={item.id} category={item} actions={this.props.actions} expenses={this.props.expenses[item.id]} />)}
+          </div>
+        )}
+
       </main>
     )
   }
@@ -48,16 +54,21 @@ class DashboardContainer extends React.Component {
 
 export const mapStateToProps = state => {
   return {
-    categories: state
+    categories: state.categories,
+    expenses: state.expenses,
   }
 };
 
 export const mapDispatchToProps = (dispatch, getState) => {
   return {
-    categoryCreate: category => dispatch(categoryCreate(category)),
-    categoryUpdate: category => dispatch(categoryUpdate(category)),
-    categoryDelete: category => dispatch(categoryDelete(category)),
-    categoryReset: category => dispatch(categoryReset(category)),
+    actions: {
+      categoryCreate: category => dispatch(categoryCreate(category)),
+      categoryUpdate: category => dispatch(categoryUpdate(category)),
+      categoryDelete: category => dispatch(categoryDelete(category)),
+      expenseCreate: expense => dispatch(expenseCreate(expense)),
+      expenseUpdate: expense => dispatch(expenseUpdate(expense)),
+      expenseDelete: expense => dispatch(expenseDelete(expense)),
+    }
   }
 };
 

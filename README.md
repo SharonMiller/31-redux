@@ -45,12 +45,18 @@ Your lab directory must include
   * `budget` a number that is the total amount of $ in the category
 
 ##### redux
-###### reducer
+###### category reducer
 * create a category reducer in your reducer directory
 * this reducer should support the following interactions
   * `CATEGORY_CREATE`
   * `CATEGORY_UPDATE`
   * `CATEGORY_DESTROY`
+###### expenses reducer
+* create a category reducer in your your reducer directory
+* this reducer should support the following interactions 
+  * `EXPENSE_CREATE` -- store an expense
+  * `EXPENSE_UPDATE` -- update an existing expense
+  * `EXPENSE_DELETE` -- delete an existing expense
 
 ###### action creators
 * you should create an action creator for each interaction supported by your category reducer
@@ -68,6 +74,9 @@ App
         CategoryForm -- for creating categories
         [Category Item]
            CategoryForm  -- for updating categories
+           ExpenseForm -- for creating expenses
+           [ExpenseItem]  -- list of ExpenseItems
+              ExpenseForm -- for updating an expe
 ```
 
 ###### App Component
@@ -84,6 +93,9 @@ The App component should set up the Provider for the redux store and the Router.
   * that function should be invoked with the CategoryForms state when the form is submitted
 * should expect a `buttonText` prop to configure the submit buttons text
 * should support an optional `category` prop that will initialize the state of the form
+* has an ExpenseForm in category item that enables the user to create expenses on your app state
+* displays a list of all the ExpenseItems belonging to the category
+
 
 ###### CategoryItem Component
 * should display the category's name and budget
@@ -92,3 +104,7 @@ The App component should set up the Provider for the redux store and the Router.
 * should display a CategoryForm
   * `onComplete` the form should update the component in the application state
 
+##### ExpenseForm Component 
+* has an `onComplete` prop that will be invoked with the form state onSubmit
+* should support an `expense` prop that will both set the initial form state, and update the state in the hook on `componentWillReceiveProps()`
+* has a `buttonText` prop that will configure the submit buttons text
