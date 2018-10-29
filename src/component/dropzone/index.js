@@ -35,6 +35,7 @@ class DropZone extends React.Component {
     e.preventDefault();
     try {
       let item = JSON.parse(e.dataTransfer.getData('application/json'));
+
       this.props.onComplete(null, item);
     } catch (e) {
       this.props.onComplete(e);
@@ -53,7 +54,7 @@ class DropZone extends React.Component {
     return (
       <div
         // className={className}
-        className={'draggable ' + (this.state.dropReady ? 'drop-ready ' : '')}
+        className={'dropzone ' + (this.state.dropReady ? 'drop-ready ' : '')}
         onDragOver={this.handleDragOver}
         onDrop={this.handleDrop}
         onDragEnter={this.handleDragEnter}
